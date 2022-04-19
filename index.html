@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Teste de lógica Loggi</title>
+    </head>
+
+    <body>
+        <div id="corpo"></div>
+    </body>
+
+    <script>
+        var data = [
+            "288355555123888",
+            "335333555584333",
+            "223343555124001",
+            "002111555874555",
+            "111188555654777",
+            "111333555123333",
+            "432055555123888",
+            "079333555584333",
+            "155333555124001",
+            "333188555584333",
+            "555288555123001",
+            "111388555123555",
+            "288000555367333",
+            "066311555874001",
+            "110333555123555",
+            "333488555584333",
+            "455448555123001",
+            "022388555123555",
+            "432044555845333",
+            "034311555874001"
+        ]
+
+        var dataValid = [];
+        var dataInvalid = [];
+
+        data.forEach( (element, index) => {
+
+
+            var dig1, dig2, dig3, dig4, dig5 = '';
+            var vali1, vali2, vali3, vali4, vali5 = false;
+
+            dig1 = element.substr(0, 3);
+            dig2 = element.substr(3, 3);
+            dig3 = element.substr(6, 3);
+            dig4 = element.substr(9, 3);
+            dig5 = element.substr(12, 3);
+
+            // Primeira Validação ( Produto )
+
+            switch (dig5) {
+
+                case '001':
+                    console.log("Jóias");
+                    vali5 = true;
+                break;
+
+                case '111':
+                    console.log("Livros");
+                    vali5 = true;
+                break;
+
+                case '333':
+                    console.log("Eletrônicos");
+                    vali5 = true;
+                break;
+
+                case '555':
+                    console.log("Bebidas");
+                    vali5 = true;
+                break;
+
+                case '888':
+                    console.log("Brinquedos");
+                    vali5 = true;
+                break;
+
+                default:
+                    vali5 = false;
+                    dataInvalid.push(element);
+                    alert ( 'Número de produto inválido '+index );
+                break;
+
+            }
+
+            // Segunda validação ( Joias para o Cerntro-oeste )
+
+            switch (dig5) {
+                case '001':
+                    console.log("teste" + index);
+
+                    var toInt = parseInt(dig1);
+                    if ( toInt >= 201 && toInt <= 299 ) {
+                        alert ('Não é possivel mandar Jóias da região Centro-oeste '+ index );
+                        vali1 = false;
+                        dataInvalid.push(element);
+                    } else {
+                        vali1 = true;
+                    }
+                break;
+            }
+
+            // Terceira validação ( Joias para o Sul )
+
+            switch (dig4) {
+                case '367':
+                    alert ('Vendedor inativo '+ index );
+                    vali4 = false;
+                    dataInvalid.push(element);
+                break;
+
+                default:
+                    vali4 = true;
+                break;
+            }
+
+        });
+
+        // Colocando dados no Array dataValid
+
+        data.forEach(element => {
+
+            eachValid = true;
+            
+            dataInvalid.forEach( invalid => {
+                if ( invalid == element ) {
+                    eachValid = false;
+                }
+            });
+
+            if (eachValid) {
+                dataValid.push(element);
+            }
+
+        });
+
+        alert("total de produtos = "+data.length+" | Total de itens invalidos = "+dataInvalid.length+" | total de itens validos = "+dataValid.length);
+        alert('Dados Validos: '+ dataValid);
+        alert('Dados Invalidos: '+ dataInvalid);
+
+    </script>
+
+
+</html>
