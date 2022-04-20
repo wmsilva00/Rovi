@@ -261,16 +261,16 @@
             return arr;
         };
 
-        alert('1. Centro-Oeste: '+centroOeste+'\nNordeste: '+Nordeste+'\nNorte: '+Norte+'\nSudeste: '+Sudeste+'\nSul: '+Sul);
-        alert('2. Pacotes validos: '+valido+'\npacotes invalidos: '+invalido);
-        alert('3. Pacotes com remetente Sul com Brinquedos: '+sulBrinquedos);
-        alert('4. Lista pacotes da região Centro-Oeste: '+listCentroOeste+'\nLista pacotes da região Nordeste: '+listNordeste+'\nLista pacotes da região Norte: '+listNorte+'\nLista pacotes da região Sudeste: '+listSudeste+'\nLista pacotes da região Sul: '+listSul);
-        alert('5. Vendedores: \n'+vendedores+'\nQuantidade de produtos: \n'+qntPedidosVendedores);
-        alert('6. Não processado');
-        alert('7. Pacotes despachados no caminhão para o Norte: \n'+listNorte+','+listCentroOeste);
-        alert('8. Ordem de pacotes no caminhão: \n'+listNorte+','+listCentroOeste);
-        alert('9. Ordem de pacotes no caminhão com as joias em primeiro: \n'+listCentroOeste+','+changePosition(listNorte, 0, 1));
-        alert('10. Pacotes invalidos: \n'+pacotesInvalidos);
+        alert('1. Identificar a região de destino de cada pacote, com totalização de pacotes (soma região)\nCentro-Oeste: '+centroOeste+'\nNordeste: '+Nordeste+'\nNorte: '+Norte+'\nSudeste: '+Sudeste+'\nSul: '+Sul);
+        alert('2. Saber quais pacotes possuem códigos de barras válidos e/ou inválidos;\nPacotes validos: '+valido+'\npacotes invalidos: '+invalido);
+        alert('3. Identificar os pacotes que têm como origem a região Sul e Brinquedos em seu conteúdo;\nPacotes com remetente Sul com Brinquedos: '+sulBrinquedos);
+        alert('4. Identificar os pacotes que têm como origem a região Sul e Brinquedos em seu conteúdo;\nLista pacotes da região Centro-Oeste: '+listCentroOeste+'\nLista pacotes da região Nordeste: '+listNordeste+'\nLista pacotes da região Norte: '+listNorte+'\nLista pacotes da região Sudeste: '+listSudeste+'\nLista pacotes da região Sul: '+listSul);
+        alert('5. Listar o número de pacotes enviados por cada vendedor (Considere apenas pacotes válidos);\nVendedores: \n'+vendedores+'\nQuantidade de produtos: \n'+qntPedidosVendedores);
+        alert('6. Gerar o relatório/lista de pacotes por destino e por tipo (Considere apenas pacotes válidos);\nNão processado');
+        alert('7. Se o transporte dos pacotes para o Norte passa pela Região Centro-Oeste, quais são os pacotes que devem ser despachados no mesmo caminhão?\nPacotes despachados no caminhão para o Norte: \n'+listNorte+','+listCentroOeste);
+        alert('8. Se todos os pacotes fossem uma fila qual seria a ordem de carga para o Norte no caminhão para descarregar os pacotes da Região Centro Oeste primeiro;\nOrdem de pacotes no caminhão: \n'+listNorte+','+listCentroOeste);
+        alert('9. No item acima considerar que as jóias fossem sempre as primeiras a serem descarregadas;\nOrdem de pacotes no caminhão com as joias em primeiro: \n'+listCentroOeste+','+changePosition(listNorte, 0, 1));
+        alert('10. Listar os pacotes inválidos.\n Pacotes invalidos: \n'+pacotesInvalidos);
 
 
     </script>
