@@ -36,14 +36,14 @@
             "034311555874001"
         ]
 
-        var dataValid = [];
-        var dataInvalid = [];
+        var infoPacotes = [];
 
         data.forEach( (element, index) => {
 
-
             var dig1, dig2, dig3, dig4, dig5 = '';
-            var vali1, vali2, vali3, vali4, vali5 = false;
+            var vali1, vali2, vali3, validador = false;
+
+            produto = '';
 
             dig1 = element.substr(0, 3);
             dig2 = element.substr(3, 3);
@@ -56,34 +56,33 @@
             switch (dig5) {
 
                 case '001':
-                    console.log("Jóias");
-                    vali5 = true;
+                    produto = 'Jóias'
+                    vali1 = true;
                 break;
 
                 case '111':
-                    console.log("Livros");
-                    vali5 = true;
+                    produto = 'Livros'
+                    vali1 = true;
                 break;
 
                 case '333':
-                    console.log("Eletrônicos");
-                    vali5 = true;
+                    produto = 'Eletrônicos'
+                    vali1 = true;
                 break;
 
                 case '555':
-                    console.log("Bebidas");
-                    vali5 = true;
+                    produto = 'Bebidas'
+                    vali1 = true;
                 break;
 
                 case '888':
-                    console.log("Brinquedos");
-                    vali5 = true;
+                    produto = 'Brinquedos'
+                    vali1 = true;
                 break;
 
                 default:
-                    vali5 = false;
-                    dataInvalid.push(element);
-                    alert ( 'Número de produto inválido '+index );
+                    vali1 = false;
+                    // alert ( 'Número de produto inválido '+index );
                 break;
 
             }
@@ -92,15 +91,14 @@
 
             switch (dig5) {
                 case '001':
-                    console.log("teste" + index);
+                    // console.log("teste" + index);
 
                     var toInt = parseInt(dig1);
                     if ( toInt >= 201 && toInt <= 299 ) {
-                        alert ('Não é possivel mandar Jóias da região Centro-oeste '+ index );
-                        vali1 = false;
-                        dataInvalid.push(element);
+                        // alert ('Não é possivel mandar Jóias da região Centro-oeste '+ index );
+                        vali2 = false;
                     } else {
-                        vali1 = true;
+                        vali2 = true;
                     }
                 break;
             }
@@ -109,39 +107,171 @@
 
             switch (dig4) {
                 case '367':
-                    alert ('Vendedor inativo '+ index );
-                    vali4 = false;
-                    dataInvalid.push(element);
+                    // alert ('Vendedor inativo '+ index );
+                    vali3 = false;
                 break;
 
                 default:
-                    vali4 = true;
+                    vali3 = true;
                 break;
             }
 
-        });
-
-        // Colocando dados no Array dataValid
-
-        data.forEach(element => {
-
-            eachValid = true;
+            var regiaoRemetente = parseInt(dig1);
+            var regiaoDestino = parseInt(dig2);
+            var nRegiaoRemetente = '';
+            var nRegiaoDestino = '';
             
-            dataInvalid.forEach( invalid => {
-                if ( invalid == element ) {
-                    eachValid = false;
-                }
-            });
-
-            if (eachValid) {
-                dataValid.push(element);
+            if ( regiaoRemetente >= 201 && regiaoRemetente <= 299 ) {
+                nRegiaoRemetente = 'Centro-oeste';
+            } else if ( regiaoRemetente >= 300 && regiaoRemetente <= 399 ) {
+                nRegiaoRemetente = 'Nordeste';
+            } else if ( regiaoRemetente >= 400 && regiaoRemetente <= 499 ) {
+                nRegiaoRemetente = 'Norte';
+            } else if ( regiaoRemetente >= 001 && regiaoRemetente <= 099 ) {
+                nRegiaoRemetente = 'Sudeste';
+            } else if ( regiaoRemetente >= 100 && regiaoRemetente <= 199 ) {
+                nRegiaoRemetente = 'Sul';
             }
 
+            if ( regiaoDestino >= 201 && regiaoDestino <= 299 ) {
+                nRegiaoDestino = 'Centro-oeste';
+            } else if ( regiaoDestino >= 300 && regiaoDestino <= 399 ) {
+                nRegiaoDestino = 'Nordeste';
+            } else if ( regiaoDestino >= 400 && regiaoDestino <= 499 ) {
+                nRegiaoDestino = 'Norte';
+            } else if ( regiaoDestino >= 001 && regiaoDestino <= 099 ) {
+                nRegiaoDestino = 'Sudeste';
+            } else if ( regiaoDestino >= 100 && regiaoDestino <= 199 ) {
+                nRegiaoDestino = 'Sul';
+            }
+
+            if (vali1 == false || vali2 == false || vali3 == false) {
+                validador = false;
+            } else {
+                validador = true;
+            }
+
+            // console.log(nRegiao);
+            var objeto = {
+                'codBarra': dig1 + dig2 + dig3 + dig4 + dig5,
+                'remetente': nRegiaoRemetente,
+                'destino': nRegiaoDestino,
+                'produto': produto,
+                'vendedor': dig4,
+                'valido': validador
+            }
+
+            infoPacotes.push(objeto)
+
         });
 
-        alert("total de produtos = "+data.length+" | Total de itens invalidos = "+dataInvalid.length+" | total de itens validos = "+dataValid.length);
-        alert('Dados Validos: '+ dataValid);
-        alert('Dados Invalidos: '+ dataInvalid);
+        console.log(infoPacotes);
+
+        var centroOeste = 0;
+        var Nordeste = 0;
+        var Norte = 0;
+        var Sudeste = 0;
+        var Sul = 0;
+
+        var valido = 0;
+        var invalido = 0
+        var pacotesInvalidos = [];
+
+        var sulBrinquedos = 0;
+
+        var listCentroOeste = [];
+        var listNordeste = [];
+        var listNorte = [];
+        var listSudeste = [];
+        var listSul = [];
+        var vendedores = [];
+        var qntPedidosVendedores = [];
+
+        //capturando dados de vendedor
+        infoPacotes.forEach(element => {
+            if (vendedores.indexOf(element.vendedor) == -1) {
+                vendedores.push(element.vendedor);
+            }
+        })
+
+        infoPacotes.forEach(element => {
+
+            // testando se é valido
+            if (element.valido) {
+                valido++;
+
+                // contabilizando regiões
+                if (element.destino == 'Centro-oeste' && element.valido == true) {
+                    centroOeste++;
+                } else if (element.destino == 'Nordeste') {
+                    Nordeste++;
+                } else if (element.destino == 'Norte') {
+                    Norte++;
+                } else if (element.destino == 'Sudeste') {
+                    Sudeste++;
+                } else if (element.destino == 'Sul') {
+                    Sul++;
+                }
+
+                // testar região sul com brinquedos
+
+                if (element.produto == 'Brinquedos' && element.remetente == 'Sul') {
+                    sulBrinquedos++;
+                }
+
+                // Listar pacotes agrupados por região de destino
+                if (element.destino == 'Centro-oeste' && element.valido == true) {
+                    listCentroOeste.push(element.codBarra);
+                } else if (element.destino == 'Nordeste') {
+                    listNordeste.push(element.codBarra);
+                } else if (element.destino == 'Norte') {
+                    listNorte.push(element.codBarra);
+                } else if (element.destino == 'Sudeste') {
+                    listSudeste.push(element.codBarra);
+                } else if (element.destino == 'Sul') {
+                    listSul.push(element.codBarra);
+                }
+
+            } else {
+                invalido++;
+                pacotesInvalidos.push(element.codBarra);
+            }
+
+            // Listar pacotes por vendedores
+            vendedores.forEach((vendedor, index) => {
+                if (vendedor == element.vendedor) {
+                    if (element.valido == false) {
+                        if (qntPedidosVendedores[index] == undefined) {
+                            qntPedidosVendedores[index] = 0;
+                        }
+                    } else {
+                        if (qntPedidosVendedores[index] == undefined) {
+                        qntPedidosVendedores[index] = 1;
+                        } else {
+                            qntPedidosVendedores[index] = qntPedidosVendedores[index] + 1;
+                        }
+                    } 
+                }
+            });
+            
+        });
+        
+        function changePosition(arr, from, to) {
+            arr.splice(to, 0, arr.splice(from, 1)[0]);
+            return arr;
+        };
+
+        alert('1. Centro-Oeste: '+centroOeste+'\nNordeste: '+Nordeste+'\nNorte: '+Norte+'\nSudeste: '+Sudeste+'\nSul: '+Sul);
+        alert('2. Pacotes validos: '+valido+'\npacotes invalidos: '+invalido);
+        alert('3. Pacotes com remetente Sul com Brinquedos: '+sulBrinquedos);
+        alert('4. Lista pacotes da região Centro-Oeste: '+listCentroOeste+'\nLista pacotes da região Nordeste: '+listNordeste+'\nLista pacotes da região Norte: '+listNorte+'\nLista pacotes da região Sudeste: '+listSudeste+'\nLista pacotes da região Sul: '+listSul);
+        alert('5. Vendedores: \n'+vendedores+'\nQuantidade de produtos: \n'+qntPedidosVendedores);
+        alert('6. Não processado');
+        alert('7. Pacotes despachados no caminhão para o Norte: \n'+listNorte+','+listCentroOeste);
+        alert('8. Ordem de pacotes no caminhão: \n'+listNorte+','+listCentroOeste);
+        alert('9. Ordem de pacotes no caminhão com as joias em primeiro: \n'+listCentroOeste+','+changePosition(listNorte, 0, 1));
+        alert('10. Pacotes invalidos: \n'+pacotesInvalidos);
+
 
     </script>
 
